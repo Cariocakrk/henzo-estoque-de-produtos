@@ -1,0 +1,176 @@
+:root {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+    --bg: #f9fafb;
+    --text: #111827;
+    --card-bg: #ffffff;
+    --border: #e5e7eb;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background-color: var(--bg);
+    padding: 40px 20px;
+    color: var(--text);
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: auto;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    color: var(--primary);
+  }
+  
+  form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  
+  input,
+  select {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: 0.2s border-color ease;
+  }
+  
+  input:focus,
+  select:focus {
+    border-color: var(--primary);
+    outline: none;
+  }
+  
+  button[type="submit"] {
+    grid-column: span 2;
+    padding: 12px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+  }
+  
+  th {
+    background-color: var(--primary);
+    color: white;
+    padding: 12px;
+    border-radius: 8px 8px 0 0;
+    text-align: left;
+  }
+  
+  td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    background-color: #fff;
+  }
+  
+  td:last-child {
+    text-align: center;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .edit-btn {
+    background-color: var(--primary);
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: var(--primary-hover);
+  }
+  
+  .delete-btn {
+    background-color: var(--danger);
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: var(--danger-hover);
+  }
+  .error-msg {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .logout-btn {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .admin-link {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    text-decoration: none;
+    background-color: #2563eb;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .back-btn {
+    margin-right: 1rem;
+    padding: 0.4rem 1rem;
+    background-color: #4b5563;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .back-btn:hover {
+    background-color: #374151;
+  }
+    
