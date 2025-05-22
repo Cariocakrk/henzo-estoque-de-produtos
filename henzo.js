@@ -3,34 +3,40 @@ const tableBody = document.getElementById('productTableBody');
 
 let editIndex = null;
 
-// Carrega categorias em select #category
-function carregarCategorias() {
-  const categorias = JSON.parse(localStorage.getItem("productCategories")) || [];
-  const select = document.getElementById("category");
-  if (!select) return;
+window.addEventListener('load', () => {
+  carregarCategorias();
+  carregarProdutos();
+});
 
-  select.innerHTML = "<option value='' disabled selected>Selecione um tipo</option>";
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
 
-  categorias.forEach(cat => {
-    const option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat;
-    select.appendChild(option);
-  });
+  const name = document.getElementById('name').value.trim();
+  const price = parseFloat(document.getElementById('price').value).toFixed(2);
+  const quantity = document.getElementById('quantity').value;
+  const category = document.getElementById('productType').value;
+
+  if (!name || !price || !quantity || !category) return;
+
+  const product = { name, price, quantity, category };
+
+  if (editIndex !== null) {
+    updateProduct(editIndex, product);
+    editIndex = null;
+  } else {
+    addProduct(product);
+  }
+
+  form.reset();
+  salvarProdutos();
+});
+
+function addProduct(product) {
+  const row = criarLinhaProduto(product);
+  tableBody.appendChild(row);
 }
 
-// Carrega produtos do localStorage e exibe na tabela
-function carregarProdutos() {
-  const produtos = JSON.parse(localStorage.getItem("products")) || [];
-  tableBody.innerHTML = "";
-
-  produtos.forEach((product, index) => {
-    const row = criarLinhaProduto(product, index);
-    tableBody.appendChild(row);
-  });
-}
-
-function criarLinhaProduto(product, index) {
+function criarLinhaProduto(product) {
   const row = document.createElement('tr');
 
   row.innerHTML = `
@@ -45,68 +51,99 @@ function criarLinhaProduto(product, index) {
   `;
 
   row.querySelector('.edit-btn').addEventListener('click', () => {
-    loadProductToForm(index);
+    loadProductToForm(row);
   });
 
   row.querySelector('.delete-btn').addEventListener('click', () => {
+    const index = Array.from(tableBody.children).indexOf(row);
+    tableBody.removeChild(row);
     removerProduto(index);
   });
 
   return row;
 }
 
-function loadProductToForm(index) {
-  const produtos = JSON.parse(localStorage.getItem("products")) || [];
-  const product = produtos[index];
+function loadProductToForm(row) {
+  const cells = row.querySelectorAll('td');
+  document.getElementById('name').value = cells[0].textContent;
+  document.getElementById('price').value = cells[1].textContent.replace('R$ ', '').replace(',', '.');
+  document.getElementById('quantity').value = cells[2].textContent;
+  document.getElementById('productType').value = cells[3].textContent;
 
-  document.getElementById('name').value = product.name;
-  document.getElementById('price').value = product.price;
-  document.getElementById('quantity').value = product.quantity;
-  document.getElementById('category').value = product.category;
+  editIndex = Array.from(tableBody.children).indexOf(row);
+}
 
-  editIndex = index;
+function updateProduct(index, updated) {
+  const row = tableBody.children[index];
+
+  row.innerHTML = `
+    <td>${updated.name}</td>
+    <td>R$ ${updated.price}</td>
+    <td>${updated.quantity}</td>
+    <td>${updated.category}</td>
+    <td>
+      <button class="edit-btn">Editar</button>
+      <button class="delete-btn">Remover</button>
+    </td>
+  `;
+
+  row.querySelector('.edit-btn').addEventListener('click', () => {
+    loadProductToForm(row);
+  });
+
+  row.querySelector('.delete-btn').addEventListener('click', () => {
+    const idx = Array.from(tableBody.children).indexOf(row);
+    tableBody.removeChild(row);
+    removerProduto(idx);
+  });
+
+  const produtos = obterProdutos();
+  produtos[index] = updated;
+  localStorage.setItem('products', JSON.stringify(produtos));
+}
+
+function obterProdutos() {
+  return JSON.parse(localStorage.getItem('products')) || [];
+}
+
+function salvarProdutos() {
+  const produtos = Array.from(tableBody.children).map(row => {
+    const cells = row.querySelectorAll('td');
+    return {
+      name: cells[0].textContent,
+      price: cells[1].textContent.replace('R$ ', ''),
+      quantity: cells[2].textContent,
+      category: cells[3].textContent
+    };
+  });
+  localStorage.setItem('products', JSON.stringify(produtos));
 }
 
 function removerProduto(index) {
-  let produtos = JSON.parse(localStorage.getItem("products")) || [];
+  const produtos = obterProdutos();
   produtos.splice(index, 1);
-  localStorage.setItem("products", JSON.stringify(produtos));
-  carregarProdutos();
-  if(editIndex === index) {
-    form.reset();
-    editIndex = null;
-  }
+  localStorage.setItem('products', JSON.stringify(produtos));
 }
 
-function salvarProdutos(produtos) {
-  localStorage.setItem("products", JSON.stringify(produtos));
+function carregarProdutos() {
+  const produtos = obterProdutos();
+  produtos.forEach(prod => {
+    const row = criarLinhaProduto(prod);
+    tableBody.appendChild(row);
+  });
 }
 
-form.addEventListener('submit', function (event) {
-  event.preventDefault();
+function carregarCategorias() {
+  const categorias = JSON.parse(localStorage.getItem('productCategories')) || [];
+  const tipoSelect = document.getElementById('productType');
 
-  const name = document.getElementById('name').value.trim();
-  const price = parseFloat(document.getElementById('price').value).toFixed(2);
-  const quantity = document.getElementById('quantity').value;
-  const category = document.getElementById('category').value;
+  tipoSelect.innerHTML = "<option value='' disabled selected>Selecione um tipo</option>";
+  categorias.forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat;
+    option.textContent = cat;
+    tipoSelect.appendChild(option);
+    option.style.color = "#000"
+  });
+}
 
-  if (!name || !price || !quantity || !category) return;
-
-  let produtos = JSON.parse(localStorage.getItem("products")) || [];
-
-  if (editIndex !== null) {
-    produtos[editIndex] = { name, price, quantity, category };
-    editIndex = null;
-  } else {
-    produtos.push({ name, price, quantity, category });
-  }
-
-  salvarProdutos(produtos);
-  form.reset();
-  carregarProdutos();
-});
-
-window.addEventListener('load', () => {
-  carregarCategorias();
-  carregarProdutos();
-});

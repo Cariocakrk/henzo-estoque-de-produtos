@@ -2,47 +2,38 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Painel de Administração</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Admin</title>
   <link rel="stylesheet" href="henzo.css" />
 </head>
 <body>
-  <div class="container">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h1>Painel Admin</h1>
-      <div>
-        <span id="welcomeUser"></span>
-        <button onclick="logout()" class="logout-btn">Logout</button>
-      </div>
-    </div>
-
+  <div class="header">
+    <h1>Painel de Administração</h1>
     <div>
-      <form id="categoryForm">
-        <input type="text" id="newCategory" placeholder="Novo tipo de produto" required />
-        <button type="submit">Adicionar Tipo</button>
-      </form>
-
-      <h2>Tipos de Produto Existentes</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Tipo</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="categoryList"></tbody>
-      </table>
-    </div>
-  </div>
-  <div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1>Painel Admin</h1>
-    <div>
-      <button onclick="window.location.href='henzo.html'" class="back-btn">Voltar para página inicial</button>
       <span id="welcomeUser"></span>
-      <button onclick="logout()" class="logout-btn">Logout</button>
+      <button onclick="logout()">Logout</button>
+      <button onclick="window.location.href='henzo.html'">Voltar</button>
     </div>
   </div>
-  
+
+  <div class="container">
+    <form id="categoryForm">
+      <input type="text" id="newCategory" placeholder="Novo tipo de produto" required />
+      <button type="submit">Adicionar Tipo</button>
+    </form>
+
+    <h2>Tipos Existentes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="categoryList"></tbody>
+    </table>
+  </div>
+
   <script src="auth.js"></script>
   <script src="admin.js"></script>
 </body>

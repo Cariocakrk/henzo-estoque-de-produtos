@@ -2,37 +2,27 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-  <link rel="stylesheet" href="henzo.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Sistema</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Login</h1>
+  <div class="login-container">
+    <h2>Bem-vindo de volta!</h2>
     <form id="loginForm">
-      <input type="text" id="username" placeholder="Usuário" required />
-      <input type="password" id="password" placeholder="Senha" required />
+      <label for="username">Usuário</label>
+      <input type="text" id="username" name="username" placeholder="Digite seu usuário" required />
+
+      <label for="password">Senha</label>
+      <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
+
       <button type="submit">Entrar</button>
-      <p id="errorMsg" class="error-msg"></p>
     </form>
+
+    <p id="loginError" class="error" style="display: none;">Usuário ou senha incorretos.</p>
   </div>
 
   <script src="auth.js"></script>
-  <script>
-    const loginForm = document.getElementById("loginForm");
-    const errorMsg = document.getElementById("errorMsg");
-
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-
-      if (login(username, password)) {
-        window.location.href = "admin.html";
-      } else {
-        errorMsg.textContent = "Usuário ou senha incorretos.";
-      }
-    });
-  </script>
 </body>
 </html>

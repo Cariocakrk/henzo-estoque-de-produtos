@@ -1,0 +1,123 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonte padrão */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #1f4068, #2980b9);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+/* Container do formulário */
+.login-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 40px 50px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  width: 320px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+/* Título */
+.login-container h2 {
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+/* Labels */
+.login-container label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Inputs */
+.login-container input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Placeholder com cor mais clara */
+.login-container input::placeholder {
+  color: #ddd;
+}
+
+/* Focus nos inputs */
+.login-container input:focus {
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 8px #2980b9;
+}
+
+/* Botão */
+.login-container button {
+  width: 100%;
+  padding: 14px;
+  background: #2980b9;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+  background: #1f4068;
+}
+
+/* Link de cadastro */
+.signup-link {
+  margin-top: 18px;
+  font-size: 0.9rem;
+  color: #eee;
+}
+
+.signup-link a {
+  color: #70c1b3;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+  color: #45a29e;
+}
+
+/* Responsividade simples */
+@media (max-width: 400px) {
+  .login-container {
+    width: 90%;
+    padding: 30px 20px;
+  }
+}
+body {
+  background-image: url('imagens/backg.jpg');
+  background-size: cover;      /* Ajusta o tamanho para cobrir toda a tela */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Não repete a imagem */
+  background-attachment: fixed; /* Faz o fundo fixo quando rolar a página */
+  /* Se quiser escurecer um pouco para dar destaque no conteúdo, pode usar um overlay via pseudo-elemento */
+  position: relative;
+  min-height: 100vh;
+}

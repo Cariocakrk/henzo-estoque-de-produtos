@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Gerenciador de Produtos</title>
-  <link rel="stylesheet" href="henzo.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerenciamento de Produtos</title>
+  <link rel="stylesheet" href="henzo.css" />
 </head>
 <body>
 
-  <div class="container">
-    <h1>Gerenciador de Produtos</h1>
+  <div class="header">
+    <h1>Gerenciamento de Produtos</h1>
+    <div>
+      <span id="welcomeUser"></span>
+      <button onclick="logout()">Logout</button>
+      <button onclick="window.location.href='admin.html'">Admin</button>
+    </div>
+  </div>
 
+  <div class="container">
     <form id="productForm">
       <input type="text" id="name" placeholder="Nome do Produto" required />
-      <input type="number" id="price" placeholder="Preço" min="0" step="0.01" required />
-      <input type="number" id="quantity" placeholder="Quantidade" min="1" required />
-      
-      <select id="category" required>
-        <option value="">Selecione um tipo</option>
-        <option value="Eletrônico">Eletrônico</option>
-        <option value="Roupas">Roupas</option>
-        <option value="Alimentos">Alimentos</option>
-        <option value="Livros">Livros</option>
+      <input type="number" id="price" placeholder="Preço" required step="0.01" min="0" />
+      <input type="number" id="quantity" placeholder="Quantidade" required min="0" />
+
+      <select id="productType" required>
+        <option value="" disabled selected>Selecione um tipo</option>
       </select>
 
-      <button type="submit">Salvar Produto</button>
+      <button type="submit">Adicionar Produto</button>
     </form>
 
     <table>
       <thead>
         <tr>
           <th>Nome</th>
-          <th>Preço (R$)</th>
+          <th>Preço</th>
           <th>Quantidade</th>
           <th>Tipo</th>
           <th>Ações</th>
@@ -40,9 +44,7 @@
     </table>
   </div>
 
-  <script src="henzo.js"></script>
   <script src="auth.js"></script>
-  <a href="login.html" class="admin-link">Área do Administrador</a>
-
+  <script src="henzo.js"></script>
 </body>
 </html>
