@@ -2,7 +2,7 @@
 const users = [
   { username: "admin", password: "1234", role: "admin" }
 ];
-
+// teste de commit
 // Função de login
 function login(username, password) {
   const user = users.find(u => u.username === username && u.password === password);
