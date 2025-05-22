@@ -21,7 +21,7 @@ function login(username, password) {
 // Função de logout
 function logout() {
   localStorage.removeItem("user");
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 // Pega o usuário logado
@@ -33,7 +33,7 @@ function getUser() {
 function requireRole(role) {
   const user = getUser();
   if (!user || user.role !== role) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   }
 }
 
